@@ -12,37 +12,37 @@ Développer une application web Laravel 12 pour la gestion des évaluations seme
 -	Génération de relevés de notes
 ________________________________________
 2. Modèle Conceptuel de Données (MCD)
-2.1 Entités Identifiées
-ANNEE_ACADEMIQUE
+### .1 Entités Identifiées
+#### ANNEE_ACADEMIQUE
 -	id (PK)
 -	libelle (ex: "2025-2026")
 -	date_debut
 -	date_fin
 -	is_active
-SPECIALITE
+#### SPECIALITE
 -	id (PK)
 -	code
 -	intitule
-MODULE
+#### MODULE
 -	id (PK)
 -	code (M1, M2, ..., M10)
 -	intitule
 -	coefficient
-UTILISATEUR (Étudiant)
+#### UTILISATEUR (Étudiant)
 -	id (PK)
 -	matricule
 -	nom
 -	prenom
 -	specialite_id (FK)
 -	annee_academique_id (FK)
-EVALUATION
+#### EVALUATION
 -	id (PK)
 -	utilisateur_id (FK)
 -	module_id (FK)
 -	semestre (1 ou 2)
 -	note
 -	annee_academique_id (FK)
-BILAN_COMPETENCES
+#### BILAN_COMPETENCES
 -	id (PK)
 -	utilisateur_id (FK)
 -	annee_academique_id (FK)
@@ -50,7 +50,7 @@ BILAN_COMPETENCES
 -	moy_eval2 (30% semestre 2)
 -	moy_competences (70%)
 -	moyenne_generale (100%)
-2.2 Relations
+### 2.2 Relations
 -	Un étudiant appartient à UNE spécialité
 -	Un étudiant est inscrit pour UNE année académique
 -	Un étudiant a PLUSIEURS évaluations
@@ -183,15 +183,15 @@ return new class extends Migration
 -	Export Excel/PDF
 ________________________________________
 5. Optimisations Techniques
-5.1 Index de Base de Données
+##### 5.1 Index de Base de Données
 -	Index sur les clés étrangères
 -	Index composites pour les requêtes fréquentes
 -	Index sur les colonnes de filtrage (is_active, semestre)
-5.2 Contraintes d\Intégrité
+##### 5.2 Contraintes d\Intégrité
 -	Contraintes UNIQUE pour éviter les doublons
 -	Foreign keys avec ON DELETE appropriés
 -	Soft deletes pour les utilisateurs
-5.3 Performance
+##### .3 Performance
 -	Eager loading pour réduire les requêtes N+1
 -	Cache pour les données statiques (modules, spécialités)
 -	Pagination pour les listes longues
@@ -1710,28 +1710,28 @@ class AnneeAcademique extends Model
 
 
 ---
-📦 Structure créée
-Models (6 fichiers)
+#####  Structure créée
+##### Models (6 fichiers)
 - 1.	AnneeAcademique.php - Gestion des années académiques
 - 2.	Specialite.php - Gestion des spécialités
 - 3.	Module.php - Gestion des modules (M1-M10)
 - 4.	User.php - Gestion des étudiants
 - 5.	Evaluation.php - Gestion des notes par module
 6.	BilanCompetence.php - Calcul des bilans finaux
-Controllers (5 fichiers)
+##### Controllers (5 fichiers)
 1.	AnneeAcademiqueController - CRUD + activation
 2.	SpecialiteController - CRUD + recherche
 3.	ModuleController - CRUD + séparation semestres
 4.	EvaluationController - CRUD + saisie multiple + relevé de notes
 5.	BilanCompetenceController - CRUD + calcul auto + tableau récap
 ✨ Fonctionnalités principales
-Models
+##### Models
 -	Relations Eloquent optimisées
 -	Scopes réutilisables (search, ordered, active, etc.)
 -	Méthodes métier (calculs, statistiques)
 -	Casts automatiques des types
 -	Soft deletes pour les utilisateurs
-Controllers
+##### Controllers
 -	Validation stricte des données
 -	Transactions DB pour l'intégrité
 -	Gestion d'erreurs complète
