@@ -5,57 +5,57 @@
 1.1 Objectif Principal
 Développer une application web Laravel 12 pour la gestion des évaluations semestrielles des étudiants avec calcul automatique des moyennes et suivi des compétences.
 1.2 Portée
-•	Gestion des années académiques
-•	Gestion des spécialités
-•	Gestion des utilisateurs (étudiants)
-•	Saisie et calcul des évaluations
-•	Génération de relevés de notes
+-	Gestion des années académiques
+-	Gestion des spécialités
+-	Gestion des utilisateurs (étudiants)
+-	Saisie et calcul des évaluations
+-	Génération de relevés de notes
 ________________________________________
 2. Modèle Conceptuel de Données (MCD)
 2.1 Entités Identifiées
 ANNEE_ACADEMIQUE
-•	id (PK)
-•	libelle (ex: "2025-2026")
-•	date_debut
-•	date_fin
-•	is_active
+-	id (PK)
+-	libelle (ex: "2025-2026")
+-	date_debut
+-	date_fin
+-	is_active
 SPECIALITE
-•	id (PK)
-•	code
-•	intitule
+-	id (PK)
+-	code
+-	intitule
 MODULE
-•	id (PK)
-•	code (M1, M2, ..., M10)
-•	intitule
-•	coefficient
+-	id (PK)
+-	code (M1, M2, ..., M10)
+-	intitule
+-	coefficient
 UTILISATEUR (Étudiant)
-•	id (PK)
-•	matricule
-•	nom
-•	prenom
-•	specialite_id (FK)
-•	annee_academique_id (FK)
+-	id (PK)
+-	matricule
+-	nom
+-	prenom
+-	specialite_id (FK)
+-	annee_academique_id (FK)
 EVALUATION
-•	id (PK)
-•	utilisateur_id (FK)
-•	module_id (FK)
-•	semestre (1 ou 2)
-•	note
-•	annee_academique_id (FK)
+-	id (PK)
+-	utilisateur_id (FK)
+-	module_id (FK)
+-	semestre (1 ou 2)
+-	note
+-	annee_academique_id (FK)
 BILAN_COMPETENCES
-•	id (PK)
-•	utilisateur_id (FK)
-•	annee_academique_id (FK)
-•	moy_eval1 (30% semestre 1)
-•	moy_eval2 (30% semestre 2)
-•	moy_competences (70%)
-•	moyenne_generale (100%)
+-	id (PK)
+-	utilisateur_id (FK)
+-	annee_academique_id (FK)
+-	moy_eval1 (30% semestre 1)
+-	moy_eval2 (30% semestre 2)
+-	moy_competences (70%)
+-	moyenne_generale (100%)
 2.2 Relations
-•	Un étudiant appartient à UNE spécialité
-•	Un étudiant est inscrit pour UNE année académique
-•	Un étudiant a PLUSIEURS évaluations
-•	Une évaluation concerne UN module et UN étudiant
-•	Un bilan de compétences est lié à UN étudiant
+-	Un étudiant appartient à UNE spécialité
+-	Un étudiant est inscrit pour UNE année académique
+-	Un étudiant a PLUSIEURS évaluations
+-	Une évaluation concerne UN module et UN étudiant
+-	Un bilan de compétences est lié à UN étudiant
 
 ---
 ### . Migrations Laravel 12 (Optimisées)
@@ -169,46 +169,46 @@ return new class extends Migration
 
 4. Fonctionnalités Principales
 4.1 Gestion des Évaluations
-•	Saisie des notes par module et par semestre (M1 à M10)
-•	Calcul automatique des moyennes semestrielles
-•	MOY/20 EVAL1 = (M1 + M2 + M3 + M4 + M5) / 5
-•	MOY/20 EVAL2 = (M6 + M7 + M8 + M9 + M10) / 5
+-	Saisie des notes par module et par semestre (M1 à M10)
+-	Calcul automatique des moyennes semestrielles
+-	MOY/20 EVAL1 = (M1 + M2 + M3 + M4 + M5) / 5
+-	MOY/20 EVAL2 = (M6 + M7 + M8 + M9 + M10) / 5
 4.2 Calcul du Bilan Final
-•	Évaluations semestrielles: 30% de la note finale
-•	Bilan des compétences: 70% de la note finale
-•	MOY.GEN (100%) = (MOY_EVALUATIONS × 0.30) + (MOY_COMPETENCES × 0.70)
+-	Évaluations semestrielles: 30% de la note finale
+-	Bilan des compétences: 70% de la note finale
+-	MOY.GEN (100%) = (MOY_EVALUATIONS × 0.30) + (MOY_COMPETENCES × 0.70)
 4.3 Reporting
-•	Relevés de notes individuels
-•	Tableaux récapitulatifs par classe/spécialité
-•	Export Excel/PDF
+-	Relevés de notes individuels
+-	Tableaux récapitulatifs par classe/spécialité
+-	Export Excel/PDF
 ________________________________________
 5. Optimisations Techniques
 5.1 Index de Base de Données
-•	Index sur les clés étrangères
-•	Index composites pour les requêtes fréquentes
-•	Index sur les colonnes de filtrage (is_active, semestre)
+-	Index sur les clés étrangères
+-	Index composites pour les requêtes fréquentes
+-	Index sur les colonnes de filtrage (is_active, semestre)
 5.2 Contraintes d\Intégrité
-•	Contraintes UNIQUE pour éviter les doublons
-•	Foreign keys avec ON DELETE appropriés
-•	Soft deletes pour les utilisateurs
+-	Contraintes UNIQUE pour éviter les doublons
+-	Foreign keys avec ON DELETE appropriés
+-	Soft deletes pour les utilisateurs
 5.3 Performance
-•	Eager loading pour réduire les requêtes N+1
-•	Cache pour les données statiques (modules, spécialités)
-•	Pagination pour les listes longues
+-	Eager loading pour réduire les requêtes N+1
+-	Cache pour les données statiques (modules, spécialités)
+-	Pagination pour les listes longues
 ________________________________________
 6. Stack Technique
-•	Framework: Laravel 12 (Novembre 2024)
-•	PHP: 8.2+
-•	Base de données: MySQL 8.0+ / PostgreSQL 15+
-•	Front-end: Blade + Livewire ou Vue.js/Inertia
-•	Authentification: Laravel Sanctum/Breeze
+-	Framework: Laravel 12 (Novembre 2024)
+-	PHP: 8.2+
+-	Base de données: MySQL 8.0+ / PostgreSQL 15+
+-	Front-end: Blade + Livewire ou Vue.js/Inertia
+-	Authentification: Laravel Sanctum/Breeze
 ________________________________________
 7. Modules Complémentaires (Optionnels)
-•	Dashboard administrateur
-•	Gestion des enseignants
-•	Historique des modifications
-•	Notifications email/SMS
-•	API REST pour intégration externe
+-	Dashboard administrateur
+-	Gestion des enseignants
+-	Historique des modifications
+-	Notifications email/SMS
+-	API REST pour intégration externe
 
 ---
 
@@ -1712,11 +1712,11 @@ class AnneeAcademique extends Model
 ---
 📦 Structure créée
 Models (6 fichiers)
-1.	AnneeAcademique.php - Gestion des années académiques
-2.	Specialite.php - Gestion des spécialités
-3.	Module.php - Gestion des modules (M1-M10)
-4.	User.php - Gestion des étudiants
-5.	Evaluation.php - Gestion des notes par module
+- 1.	AnneeAcademique.php - Gestion des années académiques
+- 2.	Specialite.php - Gestion des spécialités
+- 3.	Module.php - Gestion des modules (M1-M10)
+- 4.	User.php - Gestion des étudiants
+- 5.	Evaluation.php - Gestion des notes par module
 6.	BilanCompetence.php - Calcul des bilans finaux
 Controllers (5 fichiers)
 1.	AnneeAcademiqueController - CRUD + activation
@@ -1726,17 +1726,17 @@ Controllers (5 fichiers)
 5.	BilanCompetenceController - CRUD + calcul auto + tableau récap
 ✨ Fonctionnalités principales
 Models
-•	Relations Eloquent optimisées
-•	Scopes réutilisables (search, ordered, active, etc.)
-•	Méthodes métier (calculs, statistiques)
-•	Casts automatiques des types
-•	Soft deletes pour les utilisateurs
+-	Relations Eloquent optimisées
+-	Scopes réutilisables (search, ordered, active, etc.)
+-	Méthodes métier (calculs, statistiques)
+-	Casts automatiques des types
+-	Soft deletes pour les utilisateurs
 Controllers
-•	Validation stricte des données
-•	Transactions DB pour l'intégrité
-•	Gestion d'erreurs complète
-•	Pagination automatique
-•	Eager loading pour éviter N+1
+-	Validation stricte des données
+-	Transactions DB pour l'intégrité
+-	Gestion d'erreurs complète
+-	Pagination automatique
+-	Eager loading pour éviter N+1
 
 
 ### 
