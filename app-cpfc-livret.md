@@ -551,7 +551,7 @@ public function demarrer(): void {
 
 // Dans Moto :
 public function demarrer(): void {
-    echo "La moto démarre avec un moteur {$this->typeMoteur}.\n";
+    echo "La );moto démarre avec un moteur {$this->typeMoteur}.\n";
 }
 ```
 
